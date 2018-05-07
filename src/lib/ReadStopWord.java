@@ -11,11 +11,7 @@ public class ReadStopWord {
         List<String> list = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(file));
-
             String str;
-
-
-
             while((str = in.readLine()) != null){
                 list.add(str);
             }

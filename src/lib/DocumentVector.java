@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lib;
 
-/**
- *
- * @author maxyspark
- */
 public class DocumentVector {
-    
+    //Content represents the document(or any other object) to be clustered
+    public String Content;
+    //represents the tf*idf of  each document
+    public float[] VectorSpace;
 }
