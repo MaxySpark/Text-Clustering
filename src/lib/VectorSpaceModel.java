@@ -1,19 +1,19 @@
 package lib;
 
-import java.util.ArrayList;
-
+import java.util.*;
+import java.util.regex.*;
 
 public class VectorSpaceModel {
         private static HashSet<String> distinctTerms;
         private static ArrayList<String> documentCollection;
-        private static Regex r = new Regex("([ \\t{}()\",:;. \n])");
+        private static Pattern ptn = Pattern.compile("([ \\t{}()\",:;. \n])");
 
       /// <summary>
       /// Prepares a collection of document in vector space
       /// </summary>
       /// <param name="collection">Document collection/corpus</param>
       /// <returns>List of, document in vector space</returns>
-        public static List<DocumentVector> ProcessDocumentCollection(DocumentCollection collection)
+        public static ArrayList<DocumentVector> ProcessDocumentCollection(DocumentCollection collection)
         {
 
             distinctTerms = new HashSet<String>();
@@ -26,25 +26,29 @@ public class VectorSpaceModel {
             *
             */
 
-            foreach (String documentContent in collection.DocumentList)
+            for (String documentContent : collection.DocumentList)
             {
-                foreach (String term in r.Split(documentContent))
+                for (String term : documentContent.split(ptn.pattern()))
                 {
                     if (!StopWordsHandler.IsStotpWord(term))
-                        distinctTerms.Add(term);
+                        distinctTerms.add(term);
                     else
                         continue;
                 }
             }
-
-            List<String> removeList = new List<String>(){"\"","\r","\n","(",")","[","]","{","}","","."," ",","};
-            foreach (String s in removeList)
+            
+            String[] rmvArr = new String[]{"\"","\r","\n","(",")","[","]","{","}","","."," ",","};
+            ArrayList<String> removeList = new ArrayList<String>(Arrays.asList(rmvArr));
+            for (String s : removeList)
             {
-                distinctTerms.Remove(s);
+                distinctTerms.remove(s);
             }
 
-
-            List<DocumentVector> documentVectorSpace = new List<DocumentVector>();
+            //
+            //CURRENT PROGRESS
+            //
+            
+            ArrayList<DocumentVector> documentVectorSpace = new ArrayList<DocumentVector>();
             DocumentVector _documentVector;
             float[] space;
             foreach (String document in documentCollection)
@@ -66,7 +70,7 @@ public class VectorSpaceModel {
             return documentVectorSpace;
 
         }
-        #region Calculate TF-IDF
+        //Calculate TF-IDF
 
         //Calculates TF-IDF weight for each term t in document d
         private static float FindTFIDF(String document, String term)
@@ -96,5 +100,4 @@ public class VectorSpaceModel {
             return (float)Math.Log((float)documentCollection.Count() / (float)count);
 
         }
-        #endregion
 }

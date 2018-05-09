@@ -2,7 +2,7 @@ package lib;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class StopWordsHandle {
+public class StopWordsHandler {
     
     static String rootDir = System.getProperty("user.dir");
     static String stopFile = rootDir + "/src/data/stop-word.txt";
