@@ -47,15 +47,15 @@ public class VectorSpaceModel {
             //
             //CURRENT PROGRESS
             //
-            
+                
             ArrayList<DocumentVector> documentVectorSpace = new ArrayList<DocumentVector>();
             DocumentVector _documentVector;
             float[] space;
-            foreach (String document in documentCollection)
+            for (String document : documentCollection)
             {
                 int count = 0;
-                space = new float[distinctTerms.Count];
-                foreach (String term in distinctTerms)
+                space = new float[distinctTerms.size()];
+                for (String term : distinctTerms)
                 {
                     space[count] = FindTFIDF(document,term);
                     count++;
@@ -63,7 +63,7 @@ public class VectorSpaceModel {
                 _documentVector = new DocumentVector();
                 _documentVector.Content = document;
                 _documentVector.VectorSpace = space;
-                documentVectorSpace.Add(_documentVector);
+                documentVectorSpace.add(_documentVector);
 
             }
 
@@ -83,21 +83,36 @@ public class VectorSpaceModel {
         private static float FindTermFrequency(String document, String term)
         {
 
-            int count = r.Split(document).Where(s => s.ToUpper() == term.ToUpper()).Count();
+            String[] splitArr = document.split(ptn.pattern());
+            
+            int count = Arrays.stream(splitArr)
+                    .filter(s -> s.toUpperCase().equals(term.toUpperCase()))
+                    .toArray(String[]::new)
+                    .length
+                    ;
             //ratio of no of occurance of term t in document d to the total no of terms in the document
-            return (float)((float)count / (float)(r.Split(document).Count()));
+            return (float)((float)count / (float)(document.split(ptn.pattern()).length));
         }
 
 
         private static float FindInverseDocumentFrequency(String term)
         {
             //find the  no. of document that contains the term in whole document collection
-            int count = documentCollection.ToArray().Where(s => r.Split(s.ToUpper()).ToArray().Contains(term.ToUpper())).Count();
+            
+            String[] docArr = documentCollection.toArray(new String[documentCollection.size()]);
+            
+            int count = Arrays.stream(docArr)
+                    .filter(
+//                            s => r.Split(s.ToUpper()).ToArray().Contains(term.ToUpper())
+                            s -> Arrays.asList(s.toUpperCase().split(ptn.pattern())).contains(term.toUpperCase())
+
+                    ).toArray(String[]::new)
+                    .length;
             /*
              * log of the ratio of  total no of document in the collection to the no. of document containing the term
              * we can also use Math.Log(count/(1+documentCollection.Count)) to deal with divide by zero case;
              */
-            return (float)Math.Log((float)documentCollection.Count() / (float)count);
+            return (float)Math.log((float)documentCollection.size() / (float)count);
 
         }
 }
