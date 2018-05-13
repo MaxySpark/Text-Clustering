@@ -153,7 +153,7 @@ public class DocumentClustering {
 
                     }
 
-                    if (count == newClusterCenter.get(index).GroupedDocument.get(0).VectorSpace.Count())
+                    if (count == newClusterCenter.get(index).GroupedDocument.get(0).VectorSpace.length)
                     {
                         changeIndex[index] = 0;
                     }
@@ -177,7 +177,8 @@ public class DocumentClustering {
             
             // CHANGE IT
             
-            if (changeIndex.Where(s => (s != 0)).Select(r => r).Any())
+            if (Arrays.stream(changeIndex).filter(s-> (s!=0 && s==1)).toArray().length > 0)
+            
             {
                 stoppingCriteria = false;
             }
@@ -241,7 +242,7 @@ public class DocumentClustering {
                     }
 
                     //reassign new calculated mean on each cluster center, It indicates the reposition of centroid
-                    _clusterCenter.get(i).GroupedDocument.get(0).VectorSpace.set(j, total / _clusterCenter.get(i).GroupedDocument.size());
+                    _clusterCenter.get(i).GroupedDocument.get(0).VectorSpace[j] = total / _clusterCenter.get(i).GroupedDocument.size();
 
                 }
 
