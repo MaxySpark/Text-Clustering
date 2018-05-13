@@ -1,16 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
-/**
- *
- * @author maxyspark
- */
+import lib.*;
+import java.util.*;
+
 public class MainView extends javax.swing.JFrame {
 
+    private DocumentCollection docCollection = new DocumentCollection();
+    
+    
+    
+    
     /**
      * Creates new form MainView
      */
@@ -75,6 +74,11 @@ public class MainView extends javax.swing.JFrame {
         jScrollPane4.setViewportView(input3);
 
         addBtn.setText("Add");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         clearBtn.setText("Clear");
 
@@ -177,7 +181,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(iteration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(startBtn)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         output.setColumns(20);
@@ -194,7 +198,7 @@ public class MainView extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,8 +216,35 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void startBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBtnActionPerformed
-        // TODO add your handling code here:
+        ArrayList<DocumentVector> vSpace = VectorSpaceModel.ProcessDocumentCollection(docCollection);
+        int totalIteration = 0;
+        ArrayList<Centroid> resultSet = DocumentClustering.PrepareDocumentCluster(Integer.parseInt(noOfCluster.getText()), vSpace,totalIteration);
     }//GEN-LAST:event_startBtnActionPerformed
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        String box1,box2,box3;
+        box1 = input1.getText();
+        box2 = input2.getText();
+        box3 = input3.getText();
+        
+        if(box1 != null && !box1.isEmpty()) {
+            docCollection.DocumentList.add(box1);
+        }
+        if(box2 != null && !box2.isEmpty()) {
+            docCollection.DocumentList.add(box2);
+        }
+        if(box3 != null && !box2.isEmpty()) {
+            docCollection.DocumentList.add(box3);
+        }
+        
+        int totalDoc = docCollection.DocumentList.size();
+        totalDocs.setText(Integer.toString(totalDoc));
+        
+        input1.setText("");
+        input2.setText("");
+        input3.setText("");
+        
+    }//GEN-LAST:event_addBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,6 +280,8 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
