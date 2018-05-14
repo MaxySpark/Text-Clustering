@@ -5,16 +5,12 @@ import java.util.*;
 
 public class MainView extends javax.swing.JFrame {
 
-    private DocumentCollection docCollection = new DocumentCollection();
-    
-    
-    
-    
     /**
      * Creates new form MainView
      */
     public MainView() {
         initComponents();
+        docCollection = new DocumentCollection();
     }
 
     /**
@@ -335,7 +331,7 @@ public class MainView extends javax.swing.JFrame {
             noOfCluster.setText("");
             totalDocs.setText("");
         }
-    
+    private DocumentCollection docCollection;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;

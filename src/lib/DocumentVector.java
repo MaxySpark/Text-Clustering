@@ -1,4 +1,4 @@
-package lib;
+ package lib;
 
 public class DocumentVector {
     //Content represents the document(or any other object) to be clustered

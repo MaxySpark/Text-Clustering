@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 
 public class WrapPC {
-    public ArrayList<Centroid> resultSet;
+    public ArrayList<Centroid> resultSet = new ArrayList<Centroid>();
     public int counter;
 }

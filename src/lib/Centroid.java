@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public class Centroid {
     
-    public ArrayList<DocumentVector> GroupedDocument;
+    public ArrayList<DocumentVector> GroupedDocument= new ArrayList<DocumentVector>();
 
 }   
