@@ -6,9 +6,14 @@ public class DocumentClustering {
     private static int counter;
 
 
-    public static ArrayList<Centroid> PrepareDocumentCluster(int k, ArrayList<DocumentVector> documentCollection,int _counter)
+    public static WrapPC PrepareDocumentCluster(int k, ArrayList<DocumentVector> documentCollection,int _counter)
+//    public static ArrayList<Centroid> PrepareDocumentCluster(int k, ArrayList<DocumentVector> documentCollection,int _counter)
+
     {
         globalCounter = 0;
+        
+        WrapPC tempW = new WrapPC();
+        
         //prepares k initial centroid and assign one object randomly to each centroid
         ArrayList<Centroid> centroidCollection = new ArrayList<Centroid>();
         Centroid c;
@@ -18,7 +23,7 @@ public class DocumentClustering {
          * so avoid it using HasSet collection
          */
         HashSet<Integer> uniqRand = new HashSet<Integer>();
-        GenerateRandomNumber(uniqRand,k,documentCollection.size());
+        uniqRand = GenerateRandomNumber(uniqRand,k,documentCollection.size());
 
         for (int pos : uniqRand) 
         {
@@ -32,7 +37,7 @@ public class DocumentClustering {
         ArrayList<Centroid> resultSet = null;
         ArrayList<Centroid> prevClusterCenter;
 
-        InitializeClusterCentroid(resultSet, centroidCollection.size());
+        resultSet = InitializeClusterCentroid(resultSet, centroidCollection.size());
 
         do
         {
@@ -43,20 +48,25 @@ public class DocumentClustering {
                 int index = FindClosestClusterCenter(centroidCollection, obj);
                 resultSet.get(index).GroupedDocument.add(obj);
             }
-            InitializeClusterCentroid(centroidCollection, centroidCollection.size());
+            centroidCollection = InitializeClusterCentroid(centroidCollection, centroidCollection.size());
             centroidCollection = CalculateMeanPoints(resultSet);
             stoppingCriteria = CheckStoppingCriteria(prevClusterCenter, centroidCollection);
             if (!stoppingCriteria)
             {   
                 //initialize the result set for next iteration
-                InitializeClusterCentroid(resultSet, centroidCollection.size());
+                resultSet = InitializeClusterCentroid(resultSet, centroidCollection.size());
             }
 
 
         } while (stoppingCriteria == false);
 
-        _counter = counter;
-        return resultSet;
+//        _counter = counter;
+//        return resultSet;
+        
+        tempW.counter = counter;
+        tempW.resultSet = resultSet;
+        
+        return tempW;
 
     }
 
@@ -68,7 +78,7 @@ public class DocumentClustering {
     /// <param name="k"></param>
     /// <param name="docCount"></param>
 
-    private static void GenerateRandomNumber(HashSet<Integer> uniqRand, int k, int docCount)
+    private static HashSet<Integer> GenerateRandomNumber(HashSet<Integer> uniqRand, int k, int docCount)
     {
 
         Random r = new Random();
@@ -91,6 +101,7 @@ public class DocumentClustering {
 
             } while (uniqRand.size() != k);
         }
+        return uniqRand;
     }
 
     /// <summary>
@@ -98,7 +109,7 @@ public class DocumentClustering {
     /// </summary>
     /// <param name="centroid"></param>
     /// <param name="count"></param>
-    private static void InitializeClusterCentroid(ArrayList<Centroid> centroid,int count)
+    private static ArrayList<Centroid> InitializeClusterCentroid(ArrayList<Centroid> centroid,int count)
     {
         Centroid c;
         centroid = new ArrayList<Centroid>();
@@ -108,6 +119,8 @@ public class DocumentClustering {
             c.GroupedDocument = new ArrayList<DocumentVector>();
             centroid.add(c);
         }
+        
+        return centroid;
 
     }
 

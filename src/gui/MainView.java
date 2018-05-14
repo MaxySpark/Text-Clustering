@@ -81,8 +81,18 @@ public class MainView extends javax.swing.JFrame {
         });
 
         clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
+            }
+        });
 
         restartBtn.setText("Restart");
+        restartBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restartBtnActionPerformed(evt);
+            }
+        });
 
         lbl4.setText("Total Number Of Document");
 
@@ -217,8 +227,32 @@ public class MainView extends javax.swing.JFrame {
 
     private void startBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBtnActionPerformed
         ArrayList<DocumentVector> vSpace = VectorSpaceModel.ProcessDocumentCollection(docCollection);
+        
+        WrapPC wPC = new WrapPC();
+              
         int totalIteration = 0;
-        ArrayList<Centroid> resultSet = DocumentClustering.PrepareDocumentCluster(Integer.parseInt(noOfCluster.getText()), vSpace,totalIteration);
+        wPC = DocumentClustering.PrepareDocumentCluster(Integer.parseInt(noOfCluster.getText()), vSpace,totalIteration);
+        
+        String msg = "";
+            int count = 1;
+            for (Centroid c : wPC.resultSet)
+            {
+                msg += "------------------------------[ CLUSTER " + count + " ]-----------------------------\n";
+                for (DocumentVector document : c.GroupedDocument)
+                {
+                    msg += document.Content + "\n";
+                    if (c.GroupedDocument.size() > 1)
+                    {
+                        msg += "\n-------------------------------------------------------------------------------\n";
+                    }
+                }
+                msg += "-------------------------------------------------------------------------------\n";
+                count++;
+            }
+
+            output.setText(msg);
+            iteration.setText(Integer.toString(wPC.counter));
+        
     }//GEN-LAST:event_startBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
@@ -245,6 +279,15 @@ public class MainView extends javax.swing.JFrame {
         input3.setText("");
         
     }//GEN-LAST:event_addBtnActionPerformed
+
+    private void restartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartBtnActionPerformed
+        this.ClearField();
+        docCollection = new DocumentCollection();
+    }//GEN-LAST:event_restartBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        this.ClearField();
+    }//GEN-LAST:event_clearBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,6 +324,17 @@ public class MainView extends javax.swing.JFrame {
         });
     }
     
+    private void ClearField()
+        {
+            input1.setText("");            
+            input2.setText("");
+            input3.setText("");            
+            iteration.setText("");
+            userCluster.setText("");
+            output.setText("");            
+            noOfCluster.setText("");
+            totalDocs.setText("");
+        }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
