@@ -10,6 +10,7 @@ public class MainView extends javax.swing.JFrame {
      */
     public MainView() {
         initComponents();
+        this.setLocationRelativeTo(null);
         docCollection = new DocumentCollection();
     }
 
@@ -39,8 +40,6 @@ public class MainView extends javax.swing.JFrame {
         restartBtn = new javax.swing.JButton();
         lbl4 = new javax.swing.JLabel();
         totalDocs = new javax.swing.JTextField();
-        lbl5 = new javax.swing.JLabel();
-        userCluster = new javax.swing.JTextField();
         lbl6 = new javax.swing.JLabel();
         iteration = new javax.swing.JTextField();
         startBtn = new javax.swing.JButton();
@@ -51,10 +50,13 @@ public class MainView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        header.setText("Text Clustering");
+        header.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        header.setText("Text Clustering Using VSM");
 
+        lbl1.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lbl1.setText("No Of Cluster");
 
+        lbl2.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lbl2.setText("Enter Your Text Below. Each Text Field Represents A New");
 
         input1.setColumns(20);
@@ -90,14 +92,12 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
+        lbl4.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lbl4.setText("Total Number Of Document");
 
         totalDocs.setEnabled(false);
 
-        lbl5.setText("User Defined Cluster");
-
-        userCluster.setEnabled(false);
-
+        lbl6.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lbl6.setText("Total Iteration");
 
         iteration.setEnabled(false);
@@ -109,6 +109,7 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
+        lbl3.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
         lbl3.setText("Document");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -126,10 +127,6 @@ public class MainView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(noOfCluster, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,16 +135,19 @@ public class MainView extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(lbl6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbl4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                                    .addComponent(lbl5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lbl4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(totalDocs, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                                    .addComponent(userCluster)
                                     .addComponent(iteration)))
                             .addComponent(startBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lbl3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lbl3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(noOfCluster, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,11 +177,7 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl4)
                     .addComponent(totalDocs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl5)
-                    .addComponent(userCluster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl6)
                     .addComponent(iteration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,6 +218,7 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void startBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBtnActionPerformed
+        testRun();
         ArrayList<DocumentVector> vSpace = VectorSpaceModel.ProcessDocumentCollection(docCollection);
         
         WrapPC wPC = new WrapPC();
@@ -233,7 +230,7 @@ public class MainView extends javax.swing.JFrame {
             int count = 1;
             for (Centroid c : wPC.resultSet)
             {
-                msg += "------------------------------[ CLUSTER " + count + " ]-----------------------------\n";
+                msg += "CLUSTER " + count + " :\n";
                 for (DocumentVector document : c.GroupedDocument)
                 {
                     msg += document.Content + "\n";
@@ -263,7 +260,7 @@ public class MainView extends javax.swing.JFrame {
         if(box2 != null && !box2.isEmpty()) {
             docCollection.DocumentList.add(box2);
         }
-        if(box3 != null && !box2.isEmpty()) {
+        if(box3 != null && !box3.isEmpty()) {
             docCollection.DocumentList.add(box3);
         }
         
@@ -273,6 +270,7 @@ public class MainView extends javax.swing.JFrame {
         input1.setText("");
         input2.setText("");
         input3.setText("");
+        
         
     }//GEN-LAST:event_addBtnActionPerformed
 
@@ -326,11 +324,38 @@ public class MainView extends javax.swing.JFrame {
             input2.setText("");
             input3.setText("");            
             iteration.setText("");
-            userCluster.setText("");
+            
             output.setText("");            
             noOfCluster.setText("");
             totalDocs.setText("");
         }
+    
+    private void testRun() {
+        ArrayList<DocumentVector> vSpace = VectorSpaceModel.ProcessDocumentCollection(docCollection);
+        
+        WrapPC wPC = new WrapPC();
+              
+        int totalIteration = 0;
+        wPC = DocumentClustering.PrepareDocumentCluster(Integer.parseInt(noOfCluster.getText()), vSpace,totalIteration);
+        
+        String msg = "";
+            int count = 1;
+            for (Centroid c : wPC.resultSet)
+            {
+                msg += "------------------------------[ CLUSTER " + count + " ]-----------------------------\n";
+                for (DocumentVector document : c.GroupedDocument)
+                {
+                    msg += document.Content + "\n";
+                    if (c.GroupedDocument.size() > 1)
+                    {
+                        msg += "\n-------------------------------------------------------------------------------\n";
+                    }
+                }
+                msg += "-------------------------------------------------------------------------------\n";
+                count++;
+            }
+
+    }
     private DocumentCollection docCollection;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -351,13 +376,11 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel lbl2;
     private javax.swing.JLabel lbl3;
     private javax.swing.JLabel lbl4;
-    private javax.swing.JLabel lbl5;
     private javax.swing.JLabel lbl6;
     private javax.swing.JTextField noOfCluster;
     private javax.swing.JTextArea output;
     private javax.swing.JButton restartBtn;
     private javax.swing.JButton startBtn;
     private javax.swing.JTextField totalDocs;
-    private javax.swing.JTextField userCluster;
     // End of variables declaration//GEN-END:variables
 }
