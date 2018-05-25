@@ -7,7 +7,6 @@ public class DocumentClustering {
 
 
     public static WrapPC PrepareDocumentCluster(int k, ArrayList<DocumentVector> documentCollection,int _counter)
-//    public static ArrayList<Centroid> PrepareDocumentCluster(int k, ArrayList<DocumentVector> documentCollection,int _counter)
 
     {
         globalCounter = 0;
@@ -271,8 +270,5 @@ public class DocumentClustering {
     /// We can use the RSS value as stopping criteria of k-means algorithm when decreses in RSS value falls below a 
     /// threshold t for small t we can terminate the algorithm.
     /// </summary>
-    private static void FindRSS(ArrayList<Centroid> newCentroid, ArrayList<Centroid> _clusterCenter) 
-    {
-        //TODO:
-    }
+   
 }
