@@ -38,29 +38,29 @@ public class SimilarityMatrics {
 
 
 
-        //Euclidean Distance
-        //Computes the similarity between two documents as the distance between their point representations. Is translation invariant.
-        public static float FindEuclideanDistance(int[] vecA, int[] vecB)
-        {
-            float euclideanDistance = 0;
-            for (int i = 0; i < vecA.length; i++)
-            {
-                euclideanDistance += (float)Math.pow((vecA[i] - vecB[i]), 2);
-            }
-
-            return (float)Math.sqrt(euclideanDistance);
-
-        }
-
-        //region Extended Jaccard
-        //Combines properties of both cosine similarity and Euclidean distance
-        public static float FindExtendedJaccard(float[] vecA, float[] vecB)
-        {
-            float dotProduct = DotProduct(vecA, vecB);
-            float magnitudeOfA = Magnitude(vecA);
-            float magnitudeOfB = Magnitude(vecB);
-
-            return dotProduct / (magnitudeOfA + magnitudeOfB - dotProduct);
-
-        }
+//        //Euclidean Distance
+//        //Computes the similarity between two documents as the distance between their point representations. Is translation invariant.
+//        public static float FindEuclideanDistance(int[] vecA, int[] vecB)
+//        {
+//            float euclideanDistance = 0;
+//            for (int i = 0; i < vecA.length; i++)
+//            {
+//                euclideanDistance += (float)Math.pow((vecA[i] - vecB[i]), 2);
+//            }
+//
+//            return (float)Math.sqrt(euclideanDistance);
+//
+//        }
+//
+//        //region Extended Jaccard
+//        //Combines properties of both cosine similarity and Euclidean distance
+//        public static float FindExtendedJaccard(float[] vecA, float[] vecB)
+//        {
+//            float dotProduct = DotProduct(vecA, vecB);
+//            float magnitudeOfA = Magnitude(vecA);
+//            float magnitudeOfB = Magnitude(vecB);
+//
+//            return dotProduct / (magnitudeOfA + magnitudeOfB - dotProduct);
+//
+//        }
 }
